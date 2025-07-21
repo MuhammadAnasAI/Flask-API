@@ -1,19 +1,8 @@
-from flask import Flask, render_template, request
-import pickle
-import numpy as np
-# Load the model
-app = Flask('__name__')
+from flask import Flask
 
-model = pickle.load(open('model.pkl', 'rb'))
-@app.route('/')
-def home():
-    return render_template('index.html')
-@app.route('/predict',methods=['POST'])
-def predict():
-    feature = [int(x) for x in request.form.values()]
-    feature_final = np.array(feature).reshape(-1, 1)
-    prediction = model.predict(feature_final)
-    return render_template("index.html", prediction_text="Price of house will in Rs. {}".format(int(prediction)))
-if (__name__== "__main__"):
-    app.run(debug=True)
+app = Flask(__name__)
 
+@app.route("/")
+def hello_world():
+
+    return "<p>Hello, World, I am working on the Flask for the Web Development.</p>"
